@@ -108,12 +108,61 @@ You can add more tests in `tests/test_recommender.py`.
 Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
 
 ```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
+Loaded 20 songs from data/songs.csv
+
+==================================================
+TOP RECOMMENDATIONS
+==================================================
+
+1. Sunrise City — Neon Echo
+   Score: 7.82 / 8.0
+   Because:
+     • genre match (+2.0)
+     • mood match (+1.0)
+     • energy similarity (+1.47)
+     • valence similarity (+0.91)
+     • tempo similarity (+0.98)
+     • danceability similarity (+0.72)
+     • acousticness similarity (+0.73)
+
+2. Gym Hero — Max Pulse
+   Score: 6.48 / 8.0
+   Because:
+     • genre match (+2.0)
+     • energy similarity (+1.30)
+     • valence similarity (+0.98)
+     • tempo similarity (+0.91)
+     • danceability similarity (+0.65)
+     • acousticness similarity (+0.64)
+
+3. Rooftop Lights — Indigo Parade
+   Score: 5.68 / 8.0
+   Because:
+     • mood match (+1.0)
+     • energy similarity (+1.44)
+     • valence similarity (+0.94)
+     • tempo similarity (+0.97)
+     • danceability similarity (+0.70)
+     • acousticness similarity (+0.64)
+
+4. Night Drive Loop — Neon Echo
+   Score: 4.56 / 8.0
+   Because:
+     • energy similarity (+1.42)
+     • tempo similarity (+0.92)
+     • danceability similarity (+0.73)
+     • acousticness similarity (+0.73)
+
+5. Warehouse 3AM — Kilotronic
+   Score: 4.54 / 8.0
+   Because:
+     • energy similarity (+1.38)
+     • valence similarity (+0.92)
+     • tempo similarity (+0.94)
+     • danceability similarity (+0.68)
+     • acousticness similarity (+0.63)
+
+==================================================
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
