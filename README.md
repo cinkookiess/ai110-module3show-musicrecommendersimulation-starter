@@ -11,7 +11,7 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-Replace this paragraph with your own summary of what your version does.
+This version of the project represents each song as a set of attributes (genre, mood, energy, tempo, valence, danceability, acousticness), represents a user as an explicit `UserProfile` of target preferences, and uses a weighted point-based scoring rule (the Algorithm Recipe below) to rank the full song catalog for that one user.
 
 ---
 
@@ -21,30 +21,24 @@ Real-world recommendation systems like Spority or YoutTube typically combine two
 
 Some prompts to answer:
 
-- What features does each `Song` use in your system
-  - genre, mood, energy, tempo_bpm, valence, danceability, acousticness
-- What information does your `UserProfile` store
-  - preferred target values for energy, tempo_bpm, valence, danceability, and acousticness, plus a preferred genre and preferred mood
-- How does your `Recommender` compute a score for each song
-  - For each numeric feature, use: `score = 1 - |song_value - user_preferred_value|`
-  - This rewards songs *closer* to the user's preference, not just higher or lower values
-  - Categorical features (genre, mood) score 1 for a match, 0 otherwise
-  - Combine all feature scores into one weighted total:
-    - `song_score = (w_energy × energy_score) + (w_valence × valence_score) + (w_tempo × tempo_score) + (w_danceability × danceability_score) + (w_acousticness × acousticness_score) + (w_genre × genre_match) + (w_mood × mood_match)`
-  - Weights sum to 1
-  - Genre is weighted higher than mood (0.15 vs 0.05), since genre is a harder, more stable preference, while mood overlaps with what energy/valence/acousticness already capture
 
-- How do you choose which songs to recommend
+- **What features does each `Song` use in your system**
+  - genre, mood, energy, tempo_bpm, valence, danceability, acousticness
+- **What information does your `UserProfile` store**
+  - preferred target values for energy, tempo_bpm, valence, danceability, and acousticness, plus a preferred genre and preferred mood
+- **How does your `Recommender` compute a score for each song**
+  - See the Algorithm Recipe section below — it's the single source of truth for the exact point values and formula used.
+- **How do you choose which songs to recommend**
   - Score every song in `songs.csv` against the `UserProfile`
   - Sort songs by `song_score`, descending
-  - Filter out songs already in the user's recent listening history
-  - Return the top N as the recommendation list
+  - Return the top K as the recommendation list
   - Scoring and ranking are kept as separate steps: the scoring rule only ever looks at one song and one profile, while the ranking rule can later add things like diversity (avoiding an all-same-artist list) or freshness — without ever changing how individual songs are scored
 
 
 ## Algorithm Recipe
 
 The recommender scores each song against a `UserProfile` using the following point system:
+
 
 - **+2.0 points** — genre match (`song.genre == user.favorite_genre`)
 - **+1.0 point** — mood match (`song.mood == user.favorite_mood`)
@@ -54,9 +48,8 @@ The recommender scores each song against a `UserProfile` using the following poi
   - **+1.0 max** — tempo similarity (tempo normalized to 0–1 first)
   - **+0.75 max** — danceability similarity
   - **+0.75 max** — acousticness similarity
-
 **Total possible score per song: 8.0**
-
+ 
 Songs are scored one at a time (independent of every other song), then sorted descending and sliced to the top K to produce the final recommendation list.
 
 ### Potential biases
@@ -446,12 +439,13 @@ PROFILE: Adversarial: Dead Center
 
 ==================================================
 ```
-When templorarly removing mood:
-```
-Profile	Mood ON — #1	Mood OFF — #1	Did the ranking change?
-High-Energy Pop	Sunrise City (7.85)	Sunrise City (6.85)	No — same winner, just 1.0 lower
-Chill Lofi	Library Rain (7.84)	Focus Flow (6.91)	Yes — order flipped
-```
+### Mood Ablation Experiment
+
+| Profile | Mood ON — #1 | Mood OFF — #1 | Did the ranking change? |
+|---|---|---|---|
+| High-Energy Pop | Sunrise City (7.85) | Sunrise City (6.85) | No — same winner, just 1.0 lower |
+| Chill Lofi | Library Rain (7.84) | Focus Flow (6.91) | Yes — order flipped |
+
 
 Mood's influence isn't uniform — it matters most in close races, where a handful of songs are neck-and-neck on genre and numeric similarity. In a landslide case like "Sunrise City," mood is just extra confirmation, not the deciding vote. That's a useful, general finding about weighted scoring systems: a feature's real-world impact depends on how contested the specific decision is, not just its point value in isolation.
 
@@ -485,9 +479,9 @@ tests/test_recommender.py::test_explain_recommendation_no_false_genre_claim_on_m
 
 Use this section to document the experiments you ran. For example:
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+- **Removed the mood-match bonus** to isolate its actual effect on rankings (see "Mood Ablation Experiment" above). Result: mood only changed the #1 result in close races, not in landslide profiles.
+- **Ran three coherent user profiles** (High-Energy Pop, Chill Lofi, Deep Intense Rock) to confirm genuinely different stated tastes produce genuinely different, non-overlapping top results.
+- **Ran four adversarial profiles** (Conflicting Signals, Nonexistent Genre, Empty Profile, Dead Center) to probe edge cases — see `model_card.md` section 7 for the full breakdown of what each one revealed.
 
 ---
 
@@ -495,12 +489,9 @@ Use this section to document the experiments you ran. For example:
 
 Summarize some limitations of your recommender.
 
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
+- It only works on a small, 20-song catalog, so users with niche or extreme preferences have a much smaller effective pool than the total count suggests.
+- It does not understand lyrics, language, artist identity, or cultural context — only the seven numeric/categorical attributes in `songs.csv`.
+- It can over-favor genre and energy matches over mood, and songs near the dataset's numeric "center" can rank artificially high for vague or empty user profiles regardless of genre.
 You will go deeper on this in your model card.
 
 ---
@@ -513,8 +504,8 @@ Read and complete `model_card.md`:
 
 Write 1 to 2 paragraphs here about what you learned:
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
 
-
+Building this project made it concrete how a recommender turns raw data into a prediction: every song attribute (genre, mood, energy, tempo, valence, danceability, acousticness) gets compared against a target the user stated, each comparison produces a small number, and all of those numbers get added into one final score per song. There's no magic in that step — it's just weighted arithmetic, repeated once per song in the catalog, then sorted. What surprised me is how much a single feature's real influence depends on context rather than its point value alone. When I disabled the mood-match bonus as an experiment, it barely changed anything for a profile with one dominant, landslide winner (High-Energy Pop), but it flipped the #1 result for a closer race (Chill Lofi). A fixed weight doesn't guarantee a fixed amount of real-world influence — it only guarantees a fixed number of points, and how much those points actually matter depends on how contested the specific decision already is.
+ 
+Bias and unfairness in a system like this don't show up as a dramatic failure — they show up quietly, in the choices baked into the scoring rule itself. Genre and mood are treated as strict binary matches (2.0 or 0, 1.0 or nothing), so users whose taste sits between categories get no partial credit there at all, even though the numeric features get to reward "close enough." Missing data creates a subtler problem: an empty preference profile and a profile that explicitly asks for "everything average" produce nearly identical recommendations, because both fall back to the same hardcoded default values — the system can't tell "we know nothing about this person" apart from "this person genuinely wants the most average song in the catalog." And because the numeric similarity terms outweigh genre and mood combined, users with moderate, average-ish preferences quietly get funneled toward whichever song sits closest to the dataset's numeric center, regardless of genre — which is exactly the kind of invisible, well-intentioned design choice that could make a real recommendation system feel "off" to a user without ever throwing an error or looking obviously broken.
 
