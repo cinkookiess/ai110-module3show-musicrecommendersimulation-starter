@@ -38,13 +38,54 @@ class Recommender:
     def __init__(self, songs: List[Song]):
         self.songs = songs
 
+
+    @staticmethod
+    def _user_to_prefs(user: UserProfile) -> Dict:
+        """
+        Converts a UserProfile dataclass into the dict shape score_song
+        expects. UserProfile only carries favorite_genre, favorite_mood,
+        target_energy, and likes_acoustic, so the other numeric targets
+        (valence, tempo, danceability) fall back to score_song's own
+        neutral defaults. likes_acoustic maps to a concrete acousticness
+        target rather than a neutral default, since it's an explicit
+        yes/no signal, not a missing one.
+        """
+        return {
+            "favorite_genre": user.favorite_genre,
+            "favorite_mood": user.favorite_mood,
+            "target_energy": user.target_energy,
+            "target_acousticness": 0.8 if user.likes_acoustic else 0.2,
+        }
+ 
+    @staticmethod
+    def _song_to_dict(song: Song) -> Dict:
+        return {
+            "id": song.id,
+            "title": song.title,
+            "artist": song.artist,
+            "genre": song.genre,
+            "mood": song.mood,
+            "energy": song.energy,
+            "tempo_bpm": song.tempo_bpm,
+            "valence": song.valence,
+            "danceability": song.danceability,
+            "acousticness": song.acousticness,
+        }
+
+    
     def recommend(self, user: UserProfile, k: int = 5) -> List[Song]:
-        # TODO: Implement recommendation logic
-        return self.songs[:k]
+        user_prefs = self._user_to_prefs(user)
+        scored = [
+            (song, score_song(user_prefs, self._song_to_dict(song))[0])
+            for song in self.songs
+        ]
+        ranked = sorted(scored, key=lambda item: item[1], reverse=True)
+        return [song for song, _ in ranked[:k]]
 
     def explain_recommendation(self, user: UserProfile, song: Song) -> str:
-        # TODO: Implement explanation logic
-        return "Explanation placeholder"
+        user_prefs = self._user_to_prefs(user)
+        _, reasons = score_song(user_prefs, self._song_to_dict(song))
+        return "; ".join(reasons) if reasons else "no strong matches, but closest available"
 
 def load_songs(csv_path: str) -> List[Dict]:
     """
