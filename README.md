@@ -41,7 +41,30 @@ Some prompts to answer:
   - Return the top N as the recommendation list
   - Scoring and ranking are kept as separate steps: the scoring rule only ever looks at one song and one profile, while the ranking rule can later add things like diversity (avoiding an all-same-artist list) or freshness — without ever changing how individual songs are scored
 
-You can include a simple diagram or bullet list if helpful.
+
+## Algorithm Recipe
+
+The recommender scores each song against a `UserProfile` using the following point system:
+
+- **+2.0 points** — genre match (`song.genre == user.favorite_genre`)
+- **+1.0 point** — mood match (`song.mood == user.favorite_mood`)
+- **Similarity points**, based on `1 - |song_value - user_target|` for each numeric feature, scaled to a max value:
+  - **+1.5 max** — energy similarity
+  - **+1.0 max** — valence similarity
+  - **+1.0 max** — tempo similarity (tempo normalized to 0–1 first)
+  - **+0.75 max** — danceability similarity
+  - **+0.75 max** — acousticness similarity
+
+**Total possible score per song: 8.0**
+
+Songs are scored one at a time (independent of every other song), then sorted descending and sliced to the top K to produce the final recommendation list.
+
+### Potential biases
+
+- **Genre dominance**: at 2.0 points, a genre match alone is worth more than any single numeric feature. A song that's a near-perfect mood and energy fit but in a different genre could still be outranked by a song that merely matches genre and nothing else — potentially burying great cross-genre recommendations.
+- **Mid-range preference blind spot**: because the similarity formula rewards *closeness* to a target, a user profile with a target sitting near the middle of a feature's range (e.g. `target_energy: 0.55`) won't clearly favor either high- or low-energy songs, weakening the system's ability to distinguish genuinely different vibes for "moderate" users.
+- **No novelty or exploration**: the recipe always returns the closest possible matches to the stated profile, so it will never surface a song outside the user's usual pattern — even if, as discussed earlier, the user sometimes wants to be surprised. That behavior isn't representable in a pure content-based scoring rule.
+- **Static profile assumption**: the recipe treats `favorite_genre` and `favorite_mood` as single fixed values, so a listener with two or three distinct listening modes (e.g. workout vs. wind-down) will get recommendations blended toward an average that may not strongly satisfy either mode.
 
 ---
 
