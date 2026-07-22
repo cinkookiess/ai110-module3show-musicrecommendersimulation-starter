@@ -107,6 +107,8 @@ You can add more tests in `tests/test_recommender.py`.
 
 Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
 
+
+### PHASE 2
 ```
 Loaded 20 songs from data/songs.csv
 
@@ -163,6 +165,316 @@ TOP RECOMMENDATIONS
      • acousticness similarity (+0.63)
 
 ==================================================
+```
+
+### PHASE 4
+```
+Loaded 20 songs from data/songs.csv                                        
+
+==================================================
+TOP RECOMMENDATIONS
+==================================================
+
+1. Sunrise City — Neon Echo
+   Score: 7.82 / 8.0
+   Because:
+     • genre match (+2.0)
+     • mood match (+1.0)
+     • energy similarity (+1.47)
+     • valence similarity (+0.91)
+     • tempo similarity (+0.98)
+     • danceability similarity (+0.72)
+     • acousticness similarity (+0.73)
+
+2. Gym Hero — Max Pulse
+   Score: 6.48 / 8.0
+   Because:
+     • genre match (+2.0)
+     • energy similarity (+1.30)
+     • valence similarity (+0.98)
+     • tempo similarity (+0.91)
+     • danceability similarity (+0.65)
+     • acousticness similarity (+0.64)
+
+3. Rooftop Lights — Indigo Parade
+   Score: 5.68 / 8.0
+   Because:
+     • mood match (+1.0)
+     • energy similarity (+1.44)
+     • valence similarity (+0.94)
+     • tempo similarity (+0.97)
+     • danceability similarity (+0.70)
+     • acousticness similarity (+0.64)
+
+4. Night Drive Loop — Neon Echo
+   Score: 4.56 / 8.0
+   Because:
+     • energy similarity (+1.42)
+     • tempo similarity (+0.92)
+     • danceability similarity (+0.73)
+     • acousticness similarity (+0.73)
+
+5. Warehouse 3AM — Kilotronic
+   Score: 4.54 / 8.0
+   Because:
+     • energy similarity (+1.38)
+     • valence similarity (+0.92)
+     • tempo similarity (+0.94)
+     • danceability similarity (+0.68)
+     • acousticness similarity (+0.63)
+
+==================================================
+PS C:\Users\cynth\Documents\Projects\ai110-module3show-musicrecommendersimulation-starter> python src/main.py
+Loaded 20 songs from data/songs.csv
+
+==================================================
+PROFILE: High-Energy Pop
+==================================================
+
+1. Sunrise City — Neon Echo
+   Score: 7.85 / 8.0
+   Because:
+     • genre match (+2.0)
+     • mood match (+1.0)
+     • energy similarity (+1.46)
+     • valence similarity (+0.96)
+     • tempo similarity (+0.97)
+     • danceability similarity (+0.74)
+     • acousticness similarity (+0.73)
+
+2. Gym Hero — Max Pulse
+   Score: 6.64 / 8.0
+   Because:
+     • genre match (+2.0)
+     • energy similarity (+1.38)
+     • valence similarity (+0.97)
+     • tempo similarity (+0.92)
+     • danceability similarity (+0.69)
+     • acousticness similarity (+0.68)
+
+3. Rooftop Lights — Indigo Parade
+   Score: 5.67 / 8.0
+   Because:
+     • mood match (+1.0)
+     • energy similarity (+1.36)
+     • valence similarity (+0.99)
+     • tempo similarity (+0.98)
+     • danceability similarity (+0.74)
+
+
+==================================================
+PROFILE: Chill Lofi
+==================================================
+
+1. Library Rain — Paper Lanterns
+   Score: 7.84 / 8.0
+   Because:
+     • genre match (+2.0)
+     • mood match (+1.0)
+     • energy similarity (+1.46)
+     • valence similarity (+0.98)
+     • tempo similarity (+0.97)
+     • danceability similarity (+0.73)
+     • acousticness similarity (+0.71)
+
+2. Midnight Coding — LoRoom
+   Score: 7.82 / 8.0
+   Because:
+     • genre match (+2.0)
+     • mood match (+1.0)
+     • energy similarity (+1.44)
+     • valence similarity (+0.98)
+     • tempo similarity (+0.98)
+     • danceability similarity (+0.73)
+     • acousticness similarity (+0.68)
+
+3. Focus Flow — LoRoom
+   Score: 6.91 / 8.0
+   Because:
+     • genre match (+2.0)
+     • energy similarity (+1.47)
+     • valence similarity (+0.99)
+     • tempo similarity (+0.97)
+     • danceability similarity (+0.75)
+     • acousticness similarity (+0.73)
+
+
+==================================================
+PROFILE: Deep Intense Rock
+==================================================
+
+1. Storm Runner — Voltline
+   Score: 7.84 / 8.0
+   Because:
+     • genre match (+2.0)
+     • mood match (+1.0)
+     • energy similarity (+1.48)
+     • valence similarity (+0.92)
+     • tempo similarity (+0.98)
+     • danceability similarity (+0.70)
+     • acousticness similarity (+0.75)
+
+2. Glass Ceiling — Riot Kilo
+   Score: 5.80 / 8.0
+   Because:
+     • mood match (+1.0)
+     • energy similarity (+1.47)
+     • valence similarity (+0.95)
+     • tempo similarity (+1.00)
+     • danceability similarity (+0.69)
+     • acousticness similarity (+0.69)
+
+3. Gym Hero — Max Pulse
+   Score: 5.23 / 8.0
+   Because:
+     • mood match (+1.0)
+     • energy similarity (+1.48)
+     • tempo similarity (+0.86)
+     • acousticness similarity (+0.71)
+
+
+==================================================
+PROFILE: Adversarial: Conflicting Signals
+==================================================
+
+1. Gym Hero — Max Pulse
+   Score: 5.24 / 8.0
+   Because:
+     • genre match (+2.0)
+     • energy similarity (+1.46)
+     • tempo similarity (+0.94)
+
+2. Sunrise City — Neon Echo
+   Score: 5.15 / 8.0
+   Because:
+     • genre match (+2.0)
+     • energy similarity (+1.38)
+     • tempo similarity (+0.83)
+
+3. Marble Halls — Elias Voss
+   Score: 3.97 / 8.0
+   Because:
+     • tempo similarity (+0.89)
+     • danceability similarity (+0.71)
+     • acousticness similarity (+0.68)
+
+
+==================================================
+PROFILE: Adversarial: Nonexistent Genre
+==================================================
+
+1. Rooftop Lights — Indigo Parade
+   Score: 5.01 / 8.0
+   Because:
+     • mood match (+1.0)
+     • energy similarity (+1.26)
+     • tempo similarity (+0.82)
+     • acousticness similarity (+0.64)
+
+2. Sunrise City — Neon Echo
+   Score: 4.83 / 8.0
+   Because:
+     • mood match (+1.0)
+     • tempo similarity (+0.86)
+
+3. Dust Roads — June Carverly
+   Score: 4.54 / 8.0
+   Because:
+     • energy similarity (+1.26)
+     • valence similarity (+0.92)
+     • tempo similarity (+1.00)
+     • danceability similarity (+0.73)
+     • acousticness similarity (+0.62)
+
+
+==================================================
+PROFILE: Adversarial: Empty Profile
+==================================================
+
+1. Dust Roads — June Carverly
+   Score: 4.75 / 8.0
+   Because:
+     • energy similarity (+1.41)
+     • valence similarity (+0.98)
+     • tempo similarity (+1.00)
+     • danceability similarity (+0.73)
+     • acousticness similarity (+0.62)
+
+2. Island Wind — Solar Tide
+   Score: 4.42 / 8.0
+   Because:
+     • energy similarity (+1.47)
+     • tempo similarity (+0.89)
+     • danceability similarity (+0.61)
+     • acousticness similarity (+0.69)
+
+3. Midnight Coding — LoRoom
+   Score: 4.40 / 8.0
+   Because:
+     • energy similarity (+1.38)
+     • valence similarity (+0.94)
+     • tempo similarity (+0.83)
+     • danceability similarity (+0.66)
+
+
+==================================================
+PROFILE: Adversarial: Dead Center
+==================================================
+
+1. Dust Roads — June Carverly
+   Score: 4.63 / 8.0
+   Because:
+     • energy similarity (+1.41)
+     • valence similarity (+0.98)
+     • tempo similarity (+0.88)
+     • danceability similarity (+0.73)
+     • acousticness similarity (+0.62)
+
+2. Island Wind — Solar Tide
+   Score: 4.30 / 8.0
+   Because:
+     • energy similarity (+1.47)
+     • danceability similarity (+0.61)
+     • acousticness similarity (+0.69)
+
+3. Midnight Coding — LoRoom
+   Score: 4.29 / 8.0
+   Because:
+     • energy similarity (+1.38)
+     • valence similarity (+0.94)
+     • danceability similarity (+0.66)
+
+==================================================
+```
+When templorarly removing mood:
+```
+Profile	Mood ON — #1	Mood OFF — #1	Did the ranking change?
+High-Energy Pop	Sunrise City (7.85)	Sunrise City (6.85)	No — same winner, just 1.0 lower
+Chill Lofi	Library Rain (7.84)	Focus Flow (6.91)	Yes — order flipped
+```
+
+Mood's influence isn't uniform — it matters most in close races, where a handful of songs are neck-and-neck on genre and numeric similarity. In a landslide case like "Sunrise City," mood is just extra confirmation, not the deciding vote. That's a useful, general finding about weighted scoring systems: a feature's real-world impact depends on how contested the specific decision is, not just its point value in isolation.
+
+### TESTING
+```
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.13.14, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\cynth\Documents\Projects\ai110-module3show-musicrecommendersimulation-starter\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\cynth\Documents\Projects\ai110-module3show-musicrecommendersimulation-starter
+collected 9 items                                                                                          
+
+tests/test_recommender.py::test_recommend_returns_songs_sorted_by_score PASSED                       [ 11%]
+tests/test_recommender.py::test_explain_recommendation_returns_non_empty_string PASSED               [ 22%]
+tests/test_recommender.py::test_recommend_flips_order_for_opposite_profile PASSED                    [ 33%]
+tests/test_recommender.py::test_recommend_respects_k_limit PASSED                                    [ 44%]
+tests/test_recommender.py::test_recommend_k_larger_than_catalog_does_not_crash PASSED                [ 55%]
+tests/test_recommender.py::test_recommend_does_not_mutate_original_songs_list PASSED                 [ 66%]
+tests/test_recommender.py::test_likes_acoustic_true_favors_high_acousticness_song PASSED             [ 77%]
+tests/test_recommender.py::test_explain_recommendation_mentions_genre_when_matched PASSED            [ 88%]
+tests/test_recommender.py::test_explain_recommendation_no_false_genre_claim_on_mismatch PASSED       [100%]
+
+============================================ 9 passed in 0.08s ============================================
+(.venv) 
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
