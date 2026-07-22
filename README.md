@@ -471,6 +471,189 @@ tests/test_recommender.py::test_explain_recommendation_no_false_genre_claim_on_m
 (.venv) 
 ```
 
+### FINAL OUTPUT
+
+```
+Loaded 20 songs from data/songs.csv
+
+==================================================
+PROFILE: High-Energy Pop
+==================================================
+
++-----+----------------+---------------+------------+---------------------------------+
+|   # | Title          | Artist        | Score      | Reasons                         |
++=====+================+===============+============+=================================+
+|   1 | Sunrise City   | Neon Echo     | 7.85 / 8.0 | genre match (+2.0)              |
+|     |                |               |            | mood match (+1.0)               |
+|     |                |               |            | energy similarity (+1.46)       |
+|     |                |               |            | valence similarity (+0.96)      |
+|     |                |               |            | tempo similarity (+0.97)        |
+|     |                |               |            | danceability similarity (+0.74) |
+|     |                |               |            | acousticness similarity (+0.73) |
++-----+----------------+---------------+------------+---------------------------------+
+|   2 | Gym Hero       | Max Pulse     | 6.64 / 8.0 | genre match (+2.0)              |
+|     |                |               |            | energy similarity (+1.38)       |
+|     |                |               |            | valence similarity (+0.97)      |
+|     |                |               |            | tempo similarity (+0.92)        |
+|     |                |               |            | danceability similarity (+0.69) |
+|     |                |               |            | acousticness similarity (+0.68) |
++-----+----------------+---------------+------------+---------------------------------+
+|   3 | Rooftop Lights | Indigo Parade | 5.67 / 8.0 | mood match (+1.0)               |
+|     |                |               |            | energy similarity (+1.36)       |
+|     |                |               |            | valence similarity (+0.99)      |
+|     |                |               |            | tempo similarity (+0.98)        |
+|     |                |               |            | danceability similarity (+0.74) |
++-----+----------------+---------------+------------+---------------------------------+
+
+==================================================
+PROFILE: Chill Lofi
+==================================================
+
++-----+-----------------+----------------+------------+---------------------------------+
+|   # | Title           | Artist         | Score      | Reasons                         |
++=====+=================+================+============+=================================+
+|   1 | Library Rain    | Paper Lanterns | 7.84 / 8.0 | genre match (+2.0)              |
+|     |                 |                |            | mood match (+1.0)               |
+|     |                 |                |            | energy similarity (+1.46)       |
+|     |                 |                |            | valence similarity (+0.98)      |
+|     |                 |                |            | tempo similarity (+0.97)        |
+|     |                 |                |            | danceability similarity (+0.73) |
+|     |                 |                |            | acousticness similarity (+0.71) |
++-----+-----------------+----------------+------------+---------------------------------+
+|   2 | Midnight Coding | LoRoom         | 7.82 / 8.0 | genre match (+2.0)              |
+|     |                 |                |            | mood match (+1.0)               |
+|     |                 |                |            | energy similarity (+1.44)       |
+|     |                 |                |            | valence similarity (+0.98)      |
+|     |                 |                |            | tempo similarity (+0.98)        |
+|     |                 |                |            | danceability similarity (+0.73) |
+|     |                 |                |            | acousticness similarity (+0.68) |
++-----+-----------------+----------------+------------+---------------------------------+
+|   3 | Focus Flow      | LoRoom         | 6.91 / 8.0 | genre match (+2.0)              |
+|     |                 |                |            | energy similarity (+1.47)       |
+|     |                 |                |            | valence similarity (+0.99)      |
+|     |                 |                |            | tempo similarity (+0.97)        |
+|     |                 |                |            | danceability similarity (+0.75) |
+|     |                 |                |            | acousticness similarity (+0.73) |
++-----+-----------------+----------------+------------+---------------------------------+
+
+==================================================
+PROFILE: Deep Intense Rock
+==================================================
+
++-----+---------------+-----------+------------+---------------------------------+
+|   # | Title         | Artist    | Score      | Reasons                         |
++=====+===============+===========+============+=================================+
+|   1 | Storm Runner  | Voltline  | 7.84 / 8.0 | genre match (+2.0)              |
+|     |               |           |            | mood match (+1.0)               |
+|     |               |           |            | energy similarity (+1.48)       |
+|     |               |           |            | valence similarity (+0.92)      |
+|     |               |           |            | tempo similarity (+0.98)        |
+|     |               |           |            | danceability similarity (+0.70) |
+|     |               |           |            | acousticness similarity (+0.75) |
++-----+---------------+-----------+------------+---------------------------------+
+|   2 | Glass Ceiling | Riot Kilo | 5.80 / 8.0 | mood match (+1.0)               |
+|     |               |           |            | energy similarity (+1.47)       |
+|     |               |           |            | valence similarity (+0.95)      |
+|     |               |           |            | tempo similarity (+1.00)        |
+|     |               |           |            | danceability similarity (+0.69) |
+|     |               |           |            | acousticness similarity (+0.69) |
++-----+---------------+-----------+------------+---------------------------------+
+|   3 | Gym Hero      | Max Pulse | 5.23 / 8.0 | mood match (+1.0)               |
+|     |               |           |            | energy similarity (+1.48)       |
+|     |               |           |            | tempo similarity (+0.86)        |
+|     |               |           |            | acousticness similarity (+0.71) |
++-----+---------------+-----------+------------+---------------------------------+
+
+==================================================
+PROFILE: Adversarial: Conflicting Signals
+==================================================
+
++-----+--------------+------------+------------+---------------------------------+
+|   # | Title        | Artist     | Score      | Reasons                         |
++=====+==============+============+============+=================================+
+|   1 | Gym Hero     | Max Pulse  | 5.24 / 8.0 | genre match (+2.0)              |
+|     |              |            |            | energy similarity (+1.46)       |
+|     |              |            |            | tempo similarity (+0.94)        |
++-----+--------------+------------+------------+---------------------------------+
+|   2 | Sunrise City | Neon Echo  | 5.15 / 8.0 | genre match (+2.0)              |
+|     |              |            |            | energy similarity (+1.38)       |
+|     |              |            |            | tempo similarity (+0.83)        |
++-----+--------------+------------+------------+---------------------------------+
+|   3 | Marble Halls | Elias Voss | 3.97 / 8.0 | tempo similarity (+0.89)        |
+|     |              |            |            | danceability similarity (+0.71) |
+|     |              |            |            | acousticness similarity (+0.68) |
++-----+--------------+------------+------------+---------------------------------+
+
+==================================================
+PROFILE: Adversarial: Nonexistent Genre
+==================================================
+
++-----+----------------+---------------+------------+---------------------------------+
+|   # | Title          | Artist        | Score      | Reasons                         |
++=====+================+===============+============+=================================+
+|   1 | Rooftop Lights | Indigo Parade | 5.01 / 8.0 | mood match (+1.0)               |
+|     |                |               |            | energy similarity (+1.26)       |
+|     |                |               |            | tempo similarity (+0.82)        |
+|     |                |               |            | acousticness similarity (+0.64) |
++-----+----------------+---------------+------------+---------------------------------+
+|   2 | Sunrise City   | Neon Echo     | 4.83 / 8.0 | mood match (+1.0)               |
+|     |                |               |            | tempo similarity (+0.86)        |
++-----+----------------+---------------+------------+---------------------------------+
+|   3 | Dust Roads     | June Carverly | 4.54 / 8.0 | energy similarity (+1.26)       |
+|     |                |               |            | valence similarity (+0.92)      |
+|     |                |               |            | tempo similarity (+1.00)        |
+|     |                |               |            | danceability similarity (+0.73) |
+|     |                |               |            | acousticness similarity (+0.62) |
++-----+----------------+---------------+------------+---------------------------------+
+
+==================================================
+PROFILE: Adversarial: Empty Profile
+==================================================
+
++-----+-----------------+---------------+------------+---------------------------------+
+|   # | Title           | Artist        | Score      | Reasons                         |
++=====+=================+===============+============+=================================+
+|   1 | Dust Roads      | June Carverly | 4.75 / 8.0 | energy similarity (+1.41)       |
+|     |                 |               |            | valence similarity (+0.98)      |
+|     |                 |               |            | tempo similarity (+1.00)        |
+|     |                 |               |            | danceability similarity (+0.73) |
+|     |                 |               |            | acousticness similarity (+0.62) |
++-----+-----------------+---------------+------------+---------------------------------+
+|   2 | Island Wind     | Solar Tide    | 4.42 / 8.0 | energy similarity (+1.47)       |
+|     |                 |               |            | tempo similarity (+0.89)        |
+|     |                 |               |            | danceability similarity (+0.61) |
+|     |                 |               |            | acousticness similarity (+0.69) |
++-----+-----------------+---------------+------------+---------------------------------+
+|   3 | Midnight Coding | LoRoom        | 4.40 / 8.0 | energy similarity (+1.38)       |
+|     |                 |               |            | valence similarity (+0.94)      |
+|     |                 |               |            | tempo similarity (+0.83)        |
+|     |                 |               |            | danceability similarity (+0.66) |
++-----+-----------------+---------------+------------+---------------------------------+
+
+==================================================
+PROFILE: Adversarial: Dead Center
+==================================================
+
++-----+-----------------+---------------+------------+---------------------------------+
+|   # | Title           | Artist        | Score      | Reasons                         |
++=====+=================+===============+============+=================================+
+|   1 | Dust Roads      | June Carverly | 4.63 / 8.0 | energy similarity (+1.41)       |
+|     |                 |               |            | valence similarity (+0.98)      |
+|     |                 |               |            | tempo similarity (+0.88)        |
+|     |                 |               |            | danceability similarity (+0.73) |
+|     |                 |               |            | acousticness similarity (+0.62) |
++-----+-----------------+---------------+------------+---------------------------------+
+|   2 | Island Wind     | Solar Tide    | 4.30 / 8.0 | energy similarity (+1.47)       |
+|     |                 |               |            | danceability similarity (+0.61) |
+|     |                 |               |            | acousticness similarity (+0.69) |
++-----+-----------------+---------------+------------+---------------------------------+
+|   3 | Midnight Coding | LoRoom        | 4.29 / 8.0 | energy similarity (+1.38)       |
+|     |                 |               |            | valence similarity (+0.94)      |
+|     |                 |               |            | danceability similarity (+0.66) |
++-----+-----------------+---------------+------------+---------------------------------+
+==================================================
+```
+
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
 
 ---

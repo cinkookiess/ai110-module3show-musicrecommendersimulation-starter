@@ -11,6 +11,47 @@ You will implement the functions in recommender.py:
 
 from recommender import load_songs, recommend_songs
 
+from tabulate import tabulate
+
+
+def print_recommendations_table(recommendations) -> None:
+    """
+    Prints the top recommendations as a formatted table with columns for
+    rank, title, artist, score, and the scoring reasons. Uses tabulate if
+    it's installed; otherwise falls back to aligned ASCII formatting using
+    only Python's built-in string formatting, so this still works without
+    any extra dependencies.
+    """
+    rows = []
+    for rank, (song, score, explanation) in enumerate(recommendations, start=1):
+        reasons = explanation.replace("; ", "\n")
+        rows.append([rank, song["title"], song["artist"], f"{score:.2f} / 8.0", reasons])
+ 
+    headers = ["#", "Title", "Artist", "Score", "Reasons"]
+ 
+   
+    print(tabulate(rows, headers=headers, tablefmt="grid"))
+    return
+ 
+    # # --- ASCII fallback (no external library required) ---
+    # col_widths = [3, 22, 18, 10, 40]
+    # header_line = "".join(f"{h:<{w}}" for h, w in zip(headers, col_widths))
+    # print(header_line)
+    # print("-" * sum(col_widths))
+    # for rank, title, artist, score, reasons in rows:
+    #     first_reason, *rest_reasons = reasons.split("\n")
+    #     print(
+    #         f"{rank:<{col_widths[0]}}"
+    #         f"{title:<{col_widths[1]}}"
+    #         f"{artist:<{col_widths[2]}}"
+    #         f"{score:<{col_widths[3]}}"
+    #         f"{first_reason:<{col_widths[4]}}"
+    #     )
+    #     for reason in rest_reasons:
+    #         print(" " * sum(col_widths[:4]) + reason)
+    # print("-" * sum(col_widths))
+
+
 
 def main() -> None:
     songs = load_songs("data/songs.csv") 
@@ -96,13 +137,13 @@ def main() -> None:
         print(f"PROFILE: {profile_name}")
         print("=" * 50 + "\n")
  
-        for rank, (song, score, explanation) in enumerate(recommendations, start=1):
-            print(f"{rank}. {song['title']} — {song['artist']}")
-            print(f"   Score: {score:.2f} / 8.0")
-            print("   Because:")
-            for reason in explanation.split("; "):
-                print(f"     • {reason}")
-            print()
+        print_recommendations_table(recommendations)
+        # print(f"{rank}. {song['title']} — {song['artist']}")
+        # print(f"   Score: {score:.2f} / 8.0")
+        # print("   Because:")
+        # for reason in explanation.split("; "):
+        #     print(f"     • {reason}")
+        # print()
  
     print("=" * 50)
 
